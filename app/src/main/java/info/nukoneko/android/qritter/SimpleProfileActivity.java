@@ -5,8 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.qrcode.QRCodeWriter;
+import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
+
+import java.util.Hashtable;
+
 import info.nukoneko.android.qritter.common.BaseActivity;
 import info.nukoneko.android.qritter.util.tools.PicassoImage;
+import info.nukoneko.android.qritter.util.tools.QRGenerator;
 import info.nukoneko.android.qritter.util.tools.ShowToast;
 import twitter4j.User;
 
@@ -40,7 +48,11 @@ public class SimpleProfileActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        PicassoImage.Builder(this).load(twitterUser.getBiggerProfileImageURLHttps()).into(imageView);
+
+        imageView.setImageBitmap(QRGenerator.create("https://twitter.com/" + twitterUser.getScreenName(), 200));
+
+
+        //PicassoImage.Builder(this).load(twitterUser.getBiggerProfileImageURLHttps()).into(imageView);
     }
 
     public static void startActivity(Context context, User twitterUser) {
