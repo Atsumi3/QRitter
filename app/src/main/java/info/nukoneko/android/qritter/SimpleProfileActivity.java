@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import info.nukoneko.android.qritter.common.BaseActivity;
 import info.nukoneko.android.qritter.util.tools.QRGenerator;
 import info.nukoneko.android.qritter.util.tools.ShowToast;
-import twitter4j.Status;
 import twitter4j.User;
 
 /**

@@ -3,9 +3,6 @@ package info.nukoneko.android.qritter.util;
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
-
-import info.nukoneko.android.qritter.util.tools.PicassoImage;
 import info.nukoneko.android.qritter.util.tools.QRGenerator;
 import twitter4j.Status;
 
