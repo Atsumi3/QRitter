@@ -12,6 +12,6 @@ import twitter4j.Status;
 public class BindingUtil {
     @BindingAdapter({"bind:statusUrl"})
     public static void loadQR(ImageView view, Status status){
-        view.setImageBitmap(QRGenerator.create(String.format("https://twitter.com/%s/status/%d", status.getUser().getScreenName(), status.getId()), 200));
+        view.setImageBitmap(QRGenerator.create(String.format("https://twitter.com/%s/status/%d", status.getUser().getScreenName(), status.getId()), 100));
     }
 }

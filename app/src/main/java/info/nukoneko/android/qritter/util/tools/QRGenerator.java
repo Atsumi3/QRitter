@@ -18,11 +18,11 @@ import java.util.Hashtable;
 final public class QRGenerator {
     public static Bitmap create(String contents, int size) {
         try {
-            Hashtable hints = new Hashtable();
+            Hashtable<EncodeHintType, ErrorCorrectionLevel> hints = new Hashtable<>();
             hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
 
             QRCodeWriter writer = new QRCodeWriter();
-            BitMatrix bitMatrix = null;
+            BitMatrix bitMatrix;
             bitMatrix = writer.encode(contents, BarcodeFormat.QR_CODE, size, size, hints);
 
             int width = bitMatrix.getWidth();
