@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:apps="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="4dp">
+    xmlns:apps="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="tweet"
-            type="twitter4j.Status" />
+            type="twitter4j.Status"/>
     </data>
+
     <android.support.v7.widget.CardView
-        android:id="@+id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         apps:cardBackgroundColor="#CCCCCC"
-        apps:cardCornerRadius="2dp">
-        <info.nukoneko.android.qritter.util.view.StretchHeightImageView
-            android:id="@+id/image_area"
+        apps:cardCornerRadius="2dp"
+        android:layout_margin="4dp">
+        <!--suppress AndroidUnknownAttribute -->
+        <ImageView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            apps:statusUrl="@{tweet}"/>
+            statusUrl="@{tweet}"
+            android:contentDescription="@{tweet.text}"/>
     </android.support.v7.widget.CardView>
 </layout>

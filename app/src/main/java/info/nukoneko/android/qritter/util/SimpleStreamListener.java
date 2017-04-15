@@ -1,4 +1,4 @@
-package info.nukoneko.android.qritter.twitter;
+package info.nukoneko.android.qritter.util;
 
 import twitter4j.DirectMessage;
 import twitter4j.StallWarning;
@@ -8,10 +8,7 @@ import twitter4j.User;
 import twitter4j.UserList;
 import twitter4j.UserStreamListener;
 
-/**
- * Created by atsumi on 2016/03/17.
- */
-abstract public class SimpleStreamListener implements UserStreamListener {
+public abstract class SimpleStreamListener implements UserStreamListener {
     @Override
     public void onDeletionNotice(long directMessageId, long userId) {
 

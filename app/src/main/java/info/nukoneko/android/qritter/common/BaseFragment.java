@@ -1,1 +1,0 @@
-package info.nukoneko.android.qritter.common;import android.support.v4.app.Fragment;/** * Created by TEJNEK on 2016/03/17. */abstract public class BaseFragment extends Fragment {}

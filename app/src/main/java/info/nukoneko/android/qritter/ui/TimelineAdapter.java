@@ -1,4 +1,4 @@
-package info.nukoneko.android.qritter.twitter;
+package info.nukoneko.android.qritter.ui;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -12,12 +12,9 @@ import info.nukoneko.android.qritter.R;
 import info.nukoneko.android.qritter.databinding.ItemTweetQrBinding;
 import twitter4j.Status;
 
-/**
- * Created by atsumi on 2016/03/17.
- */
-public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.BindingHolder> {
+final class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.BindingHolder> {
 
-    private ArrayList<Status> tweets = new ArrayList<>();
+    private final ArrayList<Status> mList = new ArrayList<>();
 
     @Override
     public BindingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,31 +24,30 @@ public class TimelineAdapter extends RecyclerView.Adapter<TimelineAdapter.Bindin
 
     @Override
     public void onBindViewHolder(BindingHolder holder, int position) {
-        holder.getBinding().setTweet(tweets.get(position));
-        holder.getBinding().executePendingBindings();
+        holder.getBinding().setTweet(mList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return tweets.size();
+        return mList.size();
     }
 
-    public void insert(Status status, int position){
-        tweets.add(0, status);
-        this.notifyItemInserted(position);
+    void insert(Status status) {
+        mList.add(0, status);
+        notifyItemInserted(0);
     }
 
     static class BindingHolder extends RecyclerView.ViewHolder {
 
-        private final ItemTweetQrBinding binding;
+        private final ItemTweetQrBinding mBinding;
 
         public BindingHolder(View itemView) {
             super(itemView);
-            binding = DataBindingUtil.bind(itemView);
+            mBinding = DataBindingUtil.bind(itemView);
         }
 
         public ItemTweetQrBinding getBinding() {
-            return binding;
+            return mBinding;
         }
     }
 }
