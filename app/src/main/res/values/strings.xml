@@ -1,7 +1,3 @@
 <resources>
-    <string name="app_name">QRitter</string>
-
-    <string name="twitter_callback_uri">twneko://auth</string>
-    <string name="twitter_callback_schema">twneko</string>
     <string name="twitter_callback_host">auth</string>
 </resources>

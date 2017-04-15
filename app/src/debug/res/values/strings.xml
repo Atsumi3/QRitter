@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QRitter [Debug]</string>
+    <string name="twitter_callback_scheme">twneko-debug</string>
+</resources>

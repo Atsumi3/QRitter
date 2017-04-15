@@ -37,3 +37,6 @@
 
 #-- zxing --#
 -keep class !com.google.zxing.** { *; }
+
+#-- okio --#
+-dontwarn okio.**

@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import info.nukoneko.android.qritter.R;
 import info.nukoneko.android.qritter.ui.common.BaseActivity;
@@ -31,7 +33,7 @@ public class TwitterOAuthActivity extends BaseActivity {
         RxWrap.create(RxWrap.createObservable(new RxWrap.Callable<RequestToken>() {
             @Override
             public RequestToken call() throws TwitterException {
-                return mTwitter.getOAuthRequestToken(getString(R.string.twitter_callback_uri));
+                return mTwitter.getOAuthRequestToken(getCallbackUri());
             }
         })).subscribe(new Action1<RequestToken>() {
             @Override
@@ -51,14 +53,13 @@ public class TwitterOAuthActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Uri uri = intent.getData();
-        if (uri == null ||
-                !uri.toString().startsWith(getString(R.string.twitter_callback_uri))) {
+        final Uri uri = intent.getData();
+        if (uri == null || uri.getScheme().equals(getString(R.string.twitter_callback_scheme))) {
             return;
         }
 
         final String verifier = uri.getQueryParameter("oauth_verifier");
-        if (verifier == null || verifier.length() == 0) {
+        if (TextUtils.isEmpty(verifier)) {
             return;
         }
 
@@ -80,5 +81,10 @@ public class TwitterOAuthActivity extends BaseActivity {
                 finish();
             }
         });
+    }
+
+    @NonNull
+    private String getCallbackUri() {
+        return String.format("%s://%s", getString(R.string.twitter_callback_scheme), getString(R.string.twitter_callback_host));
     }
 }

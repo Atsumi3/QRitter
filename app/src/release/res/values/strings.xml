@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">QRitter</string>
+    <string name="twitter_callback_scheme">twneko</string>
+</resources>

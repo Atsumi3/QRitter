@@ -2,5 +2,6 @@
 <lint>
     <issue id="InvalidPackage">
         <ignore regexp="twitter4j-(.*).jar"/>
+        <ignore regexp="okio-(.*).jar"/>
     </issue>
 </lint>

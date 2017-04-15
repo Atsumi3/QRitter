@@ -31,7 +31,7 @@
                 <category android:name="android.intent.category.BROWSABLE"/>
 
                 <data
-                    android:scheme="@string/twitter_callback_schema"
+                    android:scheme="@string/twitter_callback_scheme"
                     android:host="@string/twitter_callback_host"/>
             </intent-filter>
         </activity>
