@@ -9,6 +9,7 @@ import android.text.TextUtils;
 
 import info.nukoneko.android.qritter.R;
 import info.nukoneko.android.qritter.ui.common.BaseActivity;
+import info.nukoneko.android.qritter.util.AccessTokenContainer;
 import info.nukoneko.android.qritter.util.RxWrap;
 import info.nukoneko.android.qritter.util.TwitterUtil;
 import rx.functions.Action1;
@@ -28,7 +29,7 @@ public class TwitterOAuthActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTwitter = TwitterUtil.getTwitterInstance();
+        mTwitter = TwitterUtil.getTwitterInstance(this);
 
         RxWrap.create(RxWrap.createObservable(new RxWrap.Callable<RequestToken>() {
             @Override
@@ -54,7 +55,7 @@ public class TwitterOAuthActivity extends BaseActivity {
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
         final Uri uri = intent.getData();
-        if (uri == null || uri.getScheme().equals(getString(R.string.twitter_callback_scheme))) {
+        if (uri == null || !uri.getScheme().equals(getString(R.string.twitter_callback_scheme))) {
             return;
         }
 
@@ -71,7 +72,7 @@ public class TwitterOAuthActivity extends BaseActivity {
         })).subscribe(new Action1<AccessToken>() {
             @Override
             public void call(AccessToken accessToken) {
-                TwitterUtil.addAccount(accessToken);
+                AccessTokenContainer.saveAccessToken(getApplicationContext(), accessToken);
                 finish();
             }
         }, new Action1<Throwable>() {

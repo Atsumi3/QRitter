@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import info.nukoneko.android.qritter.ui.common.BaseActivity;
+import info.nukoneko.android.qritter.util.AccessTokenContainer;
 import info.nukoneko.android.qritter.util.SimpleStreamListener;
 import info.nukoneko.android.qritter.util.TwitterUtil;
 import rx.Observable;
@@ -32,7 +33,8 @@ public final class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!TwitterUtil.hasAccessToken()) {
+
+        if (!AccessTokenContainer.hasAccessToken(getApplicationContext())) {
             AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
             alertBuilder.setTitle("アカウントが見つかりませんでした");
             alertBuilder.setMessage("認証を行ってください");
@@ -91,7 +93,7 @@ public final class MainActivity extends BaseActivity {
         return Observable.create(new Observable.OnSubscribe<Status>() {
             @Override
             public void call(final Subscriber<? super Status> subscriber) {
-                final TwitterStream stream = TwitterUtil.getTwitterStreamInstance();
+                final TwitterStream stream = TwitterUtil.getTwitterStreamInstance(MainActivity.this);
                 assert stream != null;
                 stream.addListener(new SimpleStreamListener() {
                     @Override
