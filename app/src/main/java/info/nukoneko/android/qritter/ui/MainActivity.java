@@ -55,10 +55,6 @@ public final class MainActivity extends BaseActivity {
         }
         mRecyclerView = new RecyclerView(this);
         setContentView(mRecyclerView);
-
-        mAdapter = new TimelineAdapter();
-        mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(this, 5));
     }
 
     @Override
