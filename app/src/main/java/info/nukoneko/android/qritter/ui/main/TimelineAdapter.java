@@ -1,4 +1,4 @@
-package info.nukoneko.android.qritter.ui;
+package info.nukoneko.android.qritter.ui.main;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
