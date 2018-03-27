@@ -12,11 +12,12 @@ import info.nukoneko.android.qritter.ui.common.BaseActivity;
 import info.nukoneko.android.qritter.util.AccessTokenContainer;
 import info.nukoneko.android.qritter.util.SimpleStreamListener;
 import info.nukoneko.android.qritter.util.TwitterUtil;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import twitter4j.Status;
 import twitter4j.TwitterStream;
 
@@ -75,9 +76,9 @@ public final class MainActivity extends BaseActivity {
 
         if (mTwitterStreamObserver == null) {
             mTwitterStreamObserver = createTwitterStream();
-            mTwitterStreamObserver.subscribe(new Action1<Status>() {
+            mTwitterStreamObserver.subscribe(new Consumer<Status>() {
                 @Override
-                public void call(Status status) {
+                public void accept(Status status) throws Exception {
                     mAdapter.insert(status);
                 }
             });
@@ -86,25 +87,24 @@ public final class MainActivity extends BaseActivity {
 
     @NonNull
     private Observable<Status> createTwitterStream() {
-        return Observable.create(new Observable.OnSubscribe<Status>() {
+        return Observable.create(new ObservableOnSubscribe<Status>() {
             @Override
-            public void call(final Subscriber<? super Status> subscriber) {
+            public void subscribe(final ObservableEmitter<Status> emitter) throws Exception {
                 final TwitterStream stream = TwitterUtil.getTwitterStreamInstance(MainActivity.this);
                 assert stream != null;
                 stream.addListener(new SimpleStreamListener() {
                     @Override
                     public void onStatus(Status status) {
-                        subscriber.onNext(status);
+                        emitter.onNext(status);
                     }
 
                     @Override
                     public void onException(Exception ex) {
-                        subscriber.onError(ex);
+                        emitter.onError(ex);
                     }
                 });
                 stream.user();
             }
         }).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread());
-
     }
 }
