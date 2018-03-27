@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import info.nukoneko.android.qritter.ui.common.BaseActivity;
+import info.nukoneko.android.qritter.ui.twitter_oauth.TwitterOAuthActivity;
 import info.nukoneko.android.qritter.util.AccessTokenContainer;
 import info.nukoneko.android.qritter.util.SimpleStreamListener;
 import info.nukoneko.android.qritter.util.TwitterUtil;
@@ -42,7 +43,7 @@ public final class MainActivity extends BaseActivity {
             alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    TwitterOAuthActivity.startActivity(MainActivity.this);
+                    TwitterOAuthActivity.createIntent(MainActivity.this);
                 }
             });
             alertBuilder.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

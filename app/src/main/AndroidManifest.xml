@@ -21,7 +21,7 @@
 
         <!-- Twitter Auth -->
         <activity
-            android:name=".ui.TwitterOAuthActivity"
+            android:name=".ui.twitter_oauth.TwitterOAuthActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>

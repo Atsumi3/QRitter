@@ -1,3 +1,4 @@
 <resources>
     <string name="twitter_callback_host">auth</string>
+    <string name="retry">retry</string>
 </resources>
