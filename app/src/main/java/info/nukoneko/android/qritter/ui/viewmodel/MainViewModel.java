@@ -64,10 +64,7 @@ public final class MainViewModel implements ViewModel {
     @Override
     public void destroy() {
         mContext = null;
-
-        if (mTwitterStreamObserver != null) {
-            mTwitterStreamObserver = null;
-        }
+        mTwitterStreamObserver = null;
     }
 
     public void onAuthorizeClick(View view) {

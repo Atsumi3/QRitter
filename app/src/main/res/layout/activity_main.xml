@@ -21,7 +21,8 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/do_authorize"/>
+                android:text="@string/do_authorize"
+                android:onClick="@{viewModel.onAuthorizeClick}"/>
         </LinearLayout>
     </FrameLayout>
 </layout>
