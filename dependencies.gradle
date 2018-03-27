@@ -1,7 +1,7 @@
 ext {
     supportLibraryVersion = '27.0.1'
     twitter4jVersion = '4.0.6'
-    rxAndroidVersion = '1.2.1'
+    rxAndroidVersion = '2.0.2'
     zxingVersion = '3.3.0'
 
     dependencies = [
@@ -13,7 +13,7 @@ ext {
             twitter4jCore: "org.twitter4j:twitter4j-core:$twitter4jVersion",
             twitter4jStream: "org.twitter4j:twitter4j-stream:$twitter4jVersion",
             twitter4jHttp2Support: "org.twitter4j:twitter4j-http2-support:$twitter4jVersion",
-            rxAndroid: "io.reactivex:rxandroid:$rxAndroidVersion",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion",
             zxingCore: "com.google.zxing:core:$zxingVersion",
             zxingAndroidCore: "com.google.zxing:android-core:$zxingVersion",
     ]

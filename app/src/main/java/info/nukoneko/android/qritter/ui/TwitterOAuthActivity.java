@@ -12,7 +12,7 @@ import info.nukoneko.android.qritter.ui.common.BaseActivity;
 import info.nukoneko.android.qritter.util.AccessTokenContainer;
 import info.nukoneko.android.qritter.util.RxWrap;
 import info.nukoneko.android.qritter.util.TwitterUtil;
-import rx.functions.Action1;
+import io.reactivex.functions.Consumer;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.auth.AccessToken;
@@ -36,15 +36,15 @@ public class TwitterOAuthActivity extends BaseActivity {
             public RequestToken call() throws TwitterException {
                 return mTwitter.getOAuthRequestToken(getCallbackUri());
             }
-        })).subscribe(new Action1<RequestToken>() {
+        })).subscribe(new Consumer<RequestToken>() {
             @Override
-            public void call(RequestToken requestToken) {
+            public void accept(RequestToken requestToken) throws Exception {
                 mRequestToken = requestToken;
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(requestToken.getAuthorizationURL())));
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(Throwable throwable) {
+            public void accept(Throwable throwable) throws Exception {
                 throwable.printStackTrace();
                 finish();
             }
@@ -69,15 +69,15 @@ public class TwitterOAuthActivity extends BaseActivity {
             public AccessToken call() throws TwitterException {
                 return mTwitter.getOAuthAccessToken(mRequestToken, verifier);
             }
-        })).subscribe(new Action1<AccessToken>() {
+        })).subscribe(new Consumer<AccessToken>() {
             @Override
-            public void call(AccessToken accessToken) {
+            public void accept(AccessToken accessToken) throws Exception {
                 AccessTokenContainer.saveAccessToken(getApplicationContext(), accessToken);
                 finish();
             }
-        }, new Action1<Throwable>() {
+        }, new Consumer<Throwable>() {
             @Override
-            public void call(Throwable throwable) {
+            public void accept(Throwable throwable) throws Exception {
                 throwable.printStackTrace();
                 finish();
             }
